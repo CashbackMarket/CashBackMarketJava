@@ -2,12 +2,14 @@ package cashback.supermercado;
 
 import java.util.*;
 
+import javax.management.InvalidAttributeValueException;
+
 /**
  * Luigi Guido Gontijo Barreto - 201900963 e Maria Heloísa de Paula Souza - 202003599
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ValorInvalido{
         final int maxVendedores = 5;
         final int maxGerentes = 2;
 
@@ -112,6 +114,7 @@ public class Main {
                         String nomev = read.nextLine();
                         int indice = 0;
                         boolean verificacao = false;
+                        
                         for (int i = 0; i < vendedores.size(); i++) {
                             if (nomev.equals(vendedores.get(i).getNome())) {
                                 verificacao = true;
@@ -143,7 +146,10 @@ public class Main {
                                     String cod = read.nextLine();
                                     System.out.println("\nDigite o valor do produto: ");
                                     double valorp = read.nextDouble();
-
+                                    if(valorp<=0.0){
+                                        
+                                        throw new ValorInvalido();
+                                    }
                                     vendedores.get(indice).incluiProduto(new Produto(nomep, cod, valorp));
 
                                 } else if (submenu3 == 2) {
@@ -323,6 +329,8 @@ public class Main {
             } catch (InputMismatchException erro1) {
                 System.err.println("Não é permitido inserir letras no menu, informe apenas números inteiros, reais para valores monetarios !");
                 read.nextLine();
+            }catch(ValorInvalido erro2){
+                System.err.println("Não foi possível cadastrar o produto pois o valor é inválido!");
             }
         }
 
