@@ -66,6 +66,10 @@ public class Main {
                                 String tel = read.nextLine();
                                 System.out.println("\nDigite o salario do vendedor");
                                 double salario = read.nextDouble();
+                                if(salario<=0.0){
+                                        
+                                    throw new ValorInvalido();
+                                }
 
                                 Vendedor v = new Vendedor(nome, cpf, tel, salario);
                                 vendedores.add(v);
@@ -79,20 +83,28 @@ public class Main {
                             if (gerentes.size() < maxGerentes) {
                                 System.out.println("\nDigite o nome do gerente");
                                 String nome = read.nextLine();
-                                System.out.println("\nDigite o cpf do gerente");
+                                System.out.println("\nDigite o cpf do gerente utilizando apenas números");
                                 String cpf = read.nextLine();
+                                while (ValidaCPF.isCPF(cpf) ==false){
+                                    System.out.println("\nCPF INVÁLIDO!");
+                                    System.out.println("\nDigite o cpf do gerente utilizando apenas números");
+                                    cpf = read.nextLine();
+                                }        
                                 System.out.println("\nDigite o telefone do gerente");
                                 String tel = read.nextLine();
                                 System.out.println("\nDigite o salario do gerente");
                                 double salario = read.nextDouble();
-                                System.out.println("\nDigite o acrescimo do gerente");
+                                if(salario<=0.0){   
+                                    throw new ValorInvalido();
+                                }
+                                System.out.println("\nDigite o acréscimo do gerente");
                                 double acrescimo = read.nextDouble();
 
                                 Gerente g = new Gerente(acrescimo, nome, cpf, tel, salario);
                                 gerentes.add(g);
                                 funcionarios.add(g);
                             } else {
-                                System.out.println("\nNumero maximo de Gerentes atingido"
+                                System.out.println("\nNumero máximo de Gerentes atingido"
                                 );
                             }
 
@@ -103,8 +115,13 @@ public class Main {
                         read.nextLine();
                         System.out.println("\nDigite o nome do Cliente");
                         String nome = read.nextLine();
-                        System.out.println("\nDigite o cpf do Cliente");
+                        System.out.println("\nDigite o cpf do cliente utilizando apenas números");
                         String cpf = read.nextLine();
+                        while (ValidaCPF.isCPF(cpf) ==false){
+                            System.out.println("\nCPF INVÁLIDO!");
+                            System.out.println("\nDigite o cpf do cliente utilizando apenas números");
+                            cpf = read.nextLine();
+                        }        
                         System.out.println("\nDigite o telefone do Cliente");
                         String tel = read.nextLine();
                         System.out.println("\nId do cliente:" + idCliente);
@@ -186,7 +203,7 @@ public class Main {
                                     ArrayList<Produto> e = vendedores.get(indice).getEstoque();
 
                                     for (int i = 0; i < e.size(); i++) {
-                                        System.out.println("\nNome produto: " + e.get(i).getNome() + "  Codigo de barras: " + e.get(i).getCodigoBarras() + " Valor: " + e.get(i).getValor());
+                                        System.out.println("\nNome produto: " + e.get(i).getNome() + "\nCodigo de barras: " + e.get(i).getCodigoBarras() + "\nValor: " + e.get(i).getValor());
                                     }
 
                                 }
@@ -198,17 +215,18 @@ public class Main {
                         break;
                     case 4:
 
-                        System.out.println("\n Bem vindo ao menu do gerente digite o nome do gerente para prosseguir ");
-                        String nomeg = read.nextLine();
-                        int indiceg = 0;
-                        boolean verificacaog = false;
-                        for (int i = 0; i < gerentes.size(); i++) {
-                            if (nomeg.equals(gerentes.get(i).getNome())) {
-                                verificacao = true;
-                                indice = i;
-                                break;
-                            }
+                    read.nextLine();
+                    System.out.println("\n Bem vindo ao menu do gerente digite o nome do gerente para prosseguir ");
+                    String nomeg = read.nextLine();
+                    int indiceg = 0;
+                    boolean verificacaog = false;
+                    for (int i = 0; i < gerentes.size(); i++) {
+                        if (nomeg.equals(gerentes.get(i).getNome())) {
+                            verificacaog = true;
+                            indiceg = i;
+                            break;
                         }
+                    }
 
                         if (verificacaog) {
 
@@ -235,7 +253,7 @@ public class Main {
                             }
 
                         } else {
-                            System.out.println("\n Gerente não encontrado tente novemente");
+                            System.out.println("\n Gerente não encontrado tente novamente");
                         }
                         break;
                     case 5:
@@ -258,10 +276,10 @@ public class Main {
                                     break;
                                 } else if (submenu3 == 1) {
                                     if (vendedores.size() == 0) {
-                                        System.out.println("Não foi possivel realizar compra pois falta vendedores para atendelo!");
+                                        System.out.println("Não foi possivel realizar compra pois não há vendedores disponíveis!");
                                         break;
                                     } else if (vendedores.get(0).getEstoque().size() == 0) {
-                                        System.out.println("Não foi possivel realizar compra pois não ha estoque!");
+                                        System.out.println("Não foi possivel realizar compra pois não há estoque!");
                                         break;
                                     } else {
 
@@ -269,12 +287,12 @@ public class Main {
                                         ArrayList<Produto> e = vendedores.get(0).getEstoque();
 
                                         for (int i = 0; i < e.size(); i++) {
-                                            System.out.println("\nNome produto: " + e.get(i).getNome() + "Codigo de barras: " + e.get(i).getCodigoBarras() + "Valor: " + e.get(i).getValor() + "indice" + i);
+                                            System.out.println("\nNome do produto: " + e.get(i).getNome() + "Código de barras: " + e.get(i).getCodigoBarras() + "Valor: " + e.get(i).getValor() + "índice" + i);
                                         }
                                         System.out.println("\nDigite quantos produtos deseja comprar: ");
                                         int compras = read.nextInt();
                                         for (int i = 0; i < compras; i++) {
-                                            System.out.println("\nDigite o indice do produto que deseja:");
+                                            System.out.println("\nDigite o índice do produto que deseja:");
                                             int j = read.nextInt();
 
                                             if (j >= 0 && j < e.size()) {
@@ -311,7 +329,7 @@ public class Main {
                             );
                             totalpagamento += funcionarios.get(i).calculaSalario();
                         }
-                        System.out.println("\nTotal a pagar:" + totalpagamento);
+                        System.out.println("\nTotal a pagar: " + totalpagamento);
 
                         break;
 
@@ -332,10 +350,10 @@ public class Main {
 
                 }
             } catch (InputMismatchException erro1) {
-                System.err.println("Não é permitido inserir letras no menu, informe apenas números inteiros, reais para valores monetarios !");
+                System.err.println("Não é permitido inserir letras no menu, informe apenas números inteiros, reais para valores monetários !");
                 read.nextLine();
             }catch(ValorInvalido erro2){
-                System.err.println("Não foi possível cadastrar o produto pois o valor é inválido!");
+                System.err.println("Valor inválido, digite um valor maior que 0!");
             }
         }
 
