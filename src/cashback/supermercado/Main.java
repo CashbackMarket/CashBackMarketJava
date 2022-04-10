@@ -1,8 +1,8 @@
 package cashback.supermercado;
 
-import java.util.*;
-
-import javax.management.InvalidAttributeValueException;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 /**
  * Luigi Guido Gontijo Barreto - 201900963 e Maria Heloísa de Paula Souza - 202003599
@@ -55,8 +55,13 @@ public class Main {
                             if (vendedores.size() < maxVendedores) {
                                 System.out.println("\nDigite o nome do vendedor: ");
                                 String nome = read.nextLine();
-                                System.out.println("\nDigite o cpf do vendedor");
+                                System.out.println("\nDigite o cpf do vendedor utilizando apenas números");
                                 String cpf = read.nextLine();
+                                while (ValidaCPF.isCPF(cpf) ==false){
+                                    System.out.println("\nCPF INVÁLIDO!");
+                                    System.out.println("\nDigite o cpf do vendedor utilizando apenas números");
+                                    cpf = read.nextLine();
+                                }                         
                                 System.out.println("\nDigite o telefone do vendedor");
                                 String tel = read.nextLine();
                                 System.out.println("\nDigite o salario do vendedor");
