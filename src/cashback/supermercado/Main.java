@@ -27,13 +27,13 @@ public class Main {
             try {
 
                 System.out.println("\n---------------- Menu ----------------"
-                        + "\nDigite 1 para adicionar um funcionario: "
+                        + "\nDigite 1 para adicionar um funcionário: "
                         + "\nDigite 2 para adicionar um cliente: "
-                        + "\nDigite 3 para abrir o menu de funcionario: "
+                        + "\nDigite 3 para abrir o menu de funcionário: "
                         + "\nDigite 4 para abrir o menu de gerente: "
-                        + "\nDigite 5 para abrir o menu do Cliente: "
+                        + "\nDigite 5 para abrir o menu do cliente: "
                         + "\nDigite 6 para abrir a folha de pagamento: "
-                        + "\nDigite 7 para abrir rank de clientes: "
+                        + "\nDigite 7 para abrir ranking de clientes: "
                         + "\nDigite 0 para sair "
                 );
                 menu = read.nextInt();
@@ -242,12 +242,12 @@ public class Main {
                                 if (submenu3 == 0) {
                                     break;
                                 } else if (submenu3 == 1) {
-                                    System.out.println("\nDigite a porcentagem como valor de 0 a 100: ");
-                                    double porcentagem = read.nextDouble();
+                                    System.out.println("\nDigite o percentual de cashback, valor de 0 a 100: ");
+                                    double percetagem = read.nextDouble();
 
-                                    gerentes.get(indiceg).defineBonus(porcentagem / 100, r);
+                                    gerentes.get(indiceg).defineBonus(percetagem / 100, r);
                                 } else if (submenu3 == 2) {
-                                    System.out.println("\nCashback altorizado");
+                                    System.out.println("\nCashback autorizado");
                                     gerentes.get(indiceg).autorizaCashbackCartao(r);
                                 }
                             }
@@ -267,7 +267,8 @@ public class Main {
                                 int submenu3;
                                 System.out.println("\n---------------- Menu Cliente----------------"
                                         + "\nDigite 1 para realizar compras: "
-                                        + "\nDigite 2 para realizar consultar cashback: "
+                                        + "\nDigite 2 para consultar cashback: "
+                                        + "\nDigite 3 para consultar o histórico de compra: "
                                         + "\nDigite 0 para sair "
                                 );
                                 submenu3 = read.nextInt();
@@ -309,6 +310,18 @@ public class Main {
 
                                     clientes.get(idc).getRegistroDeCompras().ConsultaCashback();
 
+                                } else if (submenu3 == 3) {
+
+
+                                    ArrayList<Produto> e = clientes.get(idc).getRegistroDeCompras().getHistoricoDeCompras();
+                                    for (int i = 0; i < e.size(); i++) {
+                                        System.out.println("\nNome produto: " 
+                                        + e.get(i).getNome() 
+                                        + "\nCodigo de barras: " 
+                                        + e.get(i).getCodigoBarras()
+                                        + "\nValor: " 
+                                        + e.get(i).getValor());
+                                    }
                                 }
 
                             }
@@ -335,7 +348,7 @@ public class Main {
 
                     case 7:
 
-                        System.out.println("\nRank clientes");
+                        System.out.println("\nRanking de clientes");
 
                         for (int i = 0; i < r.getLista().size(); i++) {
                             System.out.println("\n\nNome: " + r.getLista().get(i).getNome()

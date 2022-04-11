@@ -56,6 +56,7 @@ public class Rank {
         ordenaLista();
         while(i<10 && i<lista.size()){
             lista.get(i).getRegistroDeCompras().setCashback(lista.get(i).getRegistroDeCompras().getValorTotal()*porcentagensBonus);
+            i++;
         }
         
     }
